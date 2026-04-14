@@ -1,11 +1,17 @@
 #include <ncurses.h>
 #include <string.h>
 #include "parser.h"
+#include "player.h"
 
 int main() {
+	initscr();
+
+	Player player = {500, 0};
+
+	loadGame(&player); // load current data
+	
 	char input[100]; // A buffer to hold the characters
 	
-	initscr();
 	cbreak();
 	echo(); // Echo text so user sees what they type
 	scrollok(stdscr, TRUE);
@@ -23,6 +29,7 @@ int main() {
 
 		run = handleInput(input);
 	}
+	saveGame(&player);
 
 	endwin();
 	return 0;
