@@ -27,7 +27,7 @@ int main() {
 		// Stop and wait for enter key
 		getnstr(input, 99);
 
-		run = handleInput(input);
+		run = handleInput(input, &player);
 	}
 	saveGame(&player);
 
