@@ -1,15 +1,23 @@
 #include <string.h>
 #include <ncurses.h>
 #include "parser.h"
-#include "commands.h" // Need this to call commands
+#include "commands.h"
+#include "logic.h"
+#include "storage.h"
 
-int handleInput(char *input) {
+int handleInput(char *input, Player *p) {
 	if (strcmp(input, "money") == 0) {
-		checkMoney();
+		printw("Money: $%d\n", sysMoney(p));
 	} else if (strcmp(input, "stats") == 0) {
-		stats();
+		stats(p);
 	} else if (strcmp(input, "help") == 0) {
 		help();
+	} else if (strstr(input, "updateMoney")) {
+		int amount = 0;
+		sscanf(input, "updateMoney %d", &amount);
+		updateMoney(p, amount);
+	} else if (strcmp(input, "save") == 0) {
+		saveGame(p);
 	} else if (strcmp(input, "exit") == 0) {
 		return 0;
 	} else {
@@ -17,4 +25,3 @@ int handleInput(char *input) {
 	}
 	return 1;
 }
-
