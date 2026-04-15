@@ -2,9 +2,9 @@
 #define COMMANDS_H
 
 // Function prototypes
-void checkMoney();
-void stats();
 void help();
-void hunt();
+void checkMoney(Player *p);
+void stats(Player *p);
+void daily();
 
-#endif // End of guard
+#endif
